@@ -38,9 +38,17 @@ def add():
                         rating=book_dict['rating'])
         db.session.add(new_book)
         db.session.commit()
+        return redirect(url_for('home'))
 
     return render_template("add.html")
 
+
+@app.route("/edit", methods=["GET", "POST"])
+def edit_rating():
+    book_id = request.args.get("book_id")
+    if request.method == "GET":
+        book_to_update = Book.query.filter_by(id=book_id).first()
+        return render_template("edit_rating.html", book=book_to_update)
 
 if __name__ == "__main__":
     app.run(debug=True)
