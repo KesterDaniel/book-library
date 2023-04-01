@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
+from db import db
+
+db.create_all()
 
 app = Flask(__name__)
 
 all_books = []
-
 
 @app.route('/')
 def home():
